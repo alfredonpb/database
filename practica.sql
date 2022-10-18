@@ -52,24 +52,73 @@ SELECT usuario, telefono FROM Usuarios WHERE compania NOT IN ('TELCEL');
 SELECT usuario, telefono FROM Usuarios WHERE compania <> "TELCEL";
 
 -- Calcular el saldo promedio de los usuarios que tienen teléfono marca NOKIA
+select AVG(saldo) from usuarios where marca='NOKIA';
+SELECT AVG(saldo) FROM Usuarios WHERE marca = 'NOKIA';
+
+-- Listar el login y teléfono de los usuarios con compañía telefónica IUSACELL o AXEL
+select usuario, telefono from usuarios where compania IN('IUSACELL' or 'AXEL');
+SELECT usuario, telefono FROM Usuarios WHERE compania IN('IUSACELL', 'AXEL');
+
+-- Mostrar el email de los usuarios que no usan yahoo
+select email from usuarios where email NOT IN ('%@yahoo');
+SELECT email FROM Usuarios WHERE email NOT LIKE '%yahoo.com';
+
+-- Listar el login y teléfono de los usuarios con compañía telefónica que no sea TELCEL o IUSACELL
+SELECT usuario, telefono FROM Usuarios WHERE compania NOT IN('TELCEL', 'IUSACELL');
+
+-- Listar el login y teléfono de los usuarios con compañía telefónica UNEFON
+select usuario, telefono from usuarios where compania IN('UNEFON');
+SELECT usuario, telefono FROM Usuarios WHERE compania = 'UNEFON';
+
+-- Listar las diferentes marcas de celular en orden alfabético descendentemente
+select marca from usuarios order by marca desc;
+SELECT DISTINCT marca FROM Usuarios ORDER BY marca DESC;
+
+-- Listar las diferentes marcas de celular en orden alfabético ascendentemente
+--  ESTE MUESTR TODAS- LAS REPITE
+select marca from usuarios order by marca asc;
+-- LA CORRECTA ES USAR DISTINT - MUESTRA CADA MARCA SIN REPETIR
+SELECT DISTINCT marca FROM Usuarios ORDER BY marca DESC;
+
+-- Listar las diferentes compañías en orden alfabético aleatorio
+SELECT DISTINCT compania FROM Usuarios ORDER BY RAND();
+
+-- Listar el login de los usuarios con nivel 0 o 2
+select usuario from usuarios where nivel in (0 , 2);
+
+-- Calcular el saldo promedio de los usuarios que tienen teléfono marca LG
+select avg(saldo) from usuarios where marca ='LG';
+SELECT AVG(saldo) FROM Usuarios WHERE marca = 'LG';
+
+-- Listar el login de los usuarios con nivel 1 o 3
+select usuario from usuarios where nivel in (1 , 3);
+SELECT usuario FROM Usuarios WHERE nivel IN(1, 3);
 
 
-Listar el login y teléfono de los usuarios con compañía telefónica IUSACELL o AXEL
-Mostrar el email de los usuarios que no usan yahoo
-Listar el login y teléfono de los usuarios con compañía telefónica que no sea TELCEL o IUSACELL
-Listar el login y teléfono de los usuarios con compañía telefónica UNEFON
-Listar las diferentes marcas de celular en orden alfabético descendentemente
-Listar las diferentes compañías en orden alfabético aleatorio
-Listar el login de los usuarios con nivel 0 o 2
-Calcular el saldo promedio de los usuarios que tienen teléfono marca LG
-Listar el login de los usuarios con nivel 1 o 3
-Listar nombre y teléfono de los usuarios con teléfono que no sea de la marca BLACKBERRY
-Listar el login de los usuarios con nivel 3
-Listar el login de los usuarios con nivel 0
-Listar el login de los usuarios con nivel 1
-Contar el número de usuarios por sexo
-Listar el login y teléfono de los usuarios con compañía telefónica AT&T
-Listar las diferentes compañías en orden alfabético descendentemente
+-- Listar nombre y teléfono de los usuarios con teléfono que no sea de la marca BLACKBERRY
+select nombre, telefono from usuarios where marca not in ('BLACKBERRY');
+SELECT nombre, telefono FROM Usuarios WHERE marca <> "BLACKBERRY";
+
+-- Listar el login de los usuarios con nivel 3
+select usuario  from usuarios where nivel = 3;
+
+-- Listar el login de los usuarios con nivel 0
+SELECT usuario FROM Usuarios WHERE nivel = 0;
+
+
+-- Listar el login de los usuarios con nivel 1
+SELECT usuario FROM Usuarios WHERE nivel = 1;
+
+-- Contar el número de usuarios por sexo
+SELECT sexo, COUNT(*) FROM Usuarios GROUP BY sexo;
+
+-- Listar el login y teléfono de los usuarios con compañía telefónica AT&T
+select usuario, telefono from usuarios where compania = 'AT&T';
+
+-- Listar las diferentes compañías en orden alfabético descendentemente
+select distinct compania from usuarios order by compania desc;
+
+
 Listar el login de los usuarios inactivos
 Listar los números de teléfono sin saldo
 Calcular el saldo mínimo de los usuarios de sexo “Hombre”
