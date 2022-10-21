@@ -28,7 +28,7 @@ SELECT SUM(saldo) FROM Usuarios WHERE compania = 'NEXTEL';
 SELECT compania, COUNT(*) FROM Usuarios GROUP BY compania;
 
 -- Contar el número de usuarios por nivel
-SELECT  usuario, COUNT(*) FROM Usuarios GROUP BY nivel;
+SELECT usuario, COUNT(*) FROM Usuarios GROUP BY nivel;
 SELECT nivel, COUNT(*) FROM Usuarios GROUP BY nivel;
 
 -- Listar el login de los usuarios con nivel 2
@@ -118,25 +118,66 @@ select usuario, telefono from usuarios where compania = 'AT&T';
 -- Listar las diferentes compañías en orden alfabético descendentemente
 select distinct compania from usuarios order by compania desc;
 
+-- Listar el login de los usuarios inactivos
+select usuario from usuarios where activo = 0;
+SELECT usuario FROM Usuarios WHERE NOT activo;
 
-Listar el login de los usuarios inactivos
-Listar los números de teléfono sin saldo
-Calcular el saldo mínimo de los usuarios de sexo “Hombre”
-Listar los números de teléfono con saldo mayor a 300
-Contar el número de usuarios por marca de teléfono
-Listar nombre y teléfono de los usuarios con teléfono que no sea de la marca LG
-Listar las diferentes compañías en orden alfabético ascendentemente
-Calcular la suma de los saldos de los usuarios de la compañía telefónica UNEFON
-Mostrar el email de los usuarios que usan hotmail
-Listar los nombres de los usuarios sin saldo o inactivos
-Listar el login y teléfono de los usuarios con compañía telefónica IUSACELL o TELCEL
-Listar las diferentes marcas de celular en orden alfabético ascendentemente
-Listar las diferentes marcas de celular en orden alfabético aleatorio
-Listar el login y teléfono de los usuarios con compañía telefónica IUSACELL o UNEFON
-Listar nombre y teléfono de los usuarios con teléfono que no sea de la marca MOTOROLA o NOKIA
-Calcular la suma de los saldos de los usuarios de la compañía telefónica TELCEL
+-- Listar los números de teléfono sin saldo
+select telefono from usuarios where saldo =0;
+SELECT telefono FROM Usuarios WHERE saldo <= 0;
+
+-- Calcular el saldo mínimo de los usuarios de sexo “Hombre”
+SELECT MIN(saldo) FROM Usuarios WHERE sexo = 'H';
+
+-- Listar los números de teléfono con saldo mayor a 300
+select telefono from usuarios where saldo > 300;
 
 
+-- Contar el número de usuarios por marca de teléfono 
+SELECT marca, COUNT(*) FROM Usuarios GROUP BY marca;
+
+
+-- Listar nombre y teléfono de los usuarios con teléfono que no sea de la marca LG
+SELECT nombre, telefono FROM Usuarios WHERE marca <> "LG";
+
+-- Listar las diferentes compañías en orden alfabético ascendentemente
+SELECT DISTINCT compania FROM Usuarios ORDER BY compania ASC;
+
+-- Calcular la suma de los saldos de los usuarios de la compañía telefónica UNEFON
+SELECT SUM(saldo) FROM Usuarios WHERE compania = 'unefon';
+SELECT SUM(saldo) FROM Usuarios WHERE compania = 'UNEFON';
+
+-- Mostrar el email de los usuarios que usan hotmail
+SELECT email FROM Usuarios WHERE email LIKE "%hotmail.com";
+
+-- Listar los nombres de los usuarios sin saldo o inactivos
+SELECT nombre FROM Usuarios WHERE NOT activo OR saldo <= 0;
+
+-- Listar el login y teléfono de los usuarios con compañía telefónica IUSACELL o TELCEL
+select usuario, telefono from usuarios where compania in ('IUSACELL','TELCEL');
+SELECT usuario, telefono FROM Usuarios WHERE compania IN('IUSACELL', 'TELCEL');
+
+-- Listar las diferentes marcas de celular en orden alfabético ascendente y descendentemente:
+select distinct marca from usuarios order by marca asc;
+SELECT DISTINCT marca FROM Usuarios ORDER BY marca DESC;
+
+-- Listar las diferentes marcas de celular en orden alfabético aleatorio
+select distinct marca from usuarios order by rand();
+SELECT DISTINCT marca FROM Usuarios ORDER BY RAND();
+
+-- Listar el login y teléfono de los usuarios con compañía telefónica IUSACELL o UNEFON
+select usuario, telefono from usuarios where compania  in ('IUSACELL', 'UNEFON');
+SELECT usuario, telefono FROM Usuarios WHERE compania IN ('IUSACELL', 'UNEFON');
+
+-- Listar nombre y teléfono de los usuarios con teléfono que no sea de la marca MOTOROLA o NOKIA
+select nombre, telefono from usuarios where marca not in ('MOTOROLA', 'TELCEL');
+SELECT nombre, telefono FROM Usuarios WHERE marca NOT IN('MOTOROLA', 'NOKIA');
+
+-- Calcular la suma de los saldos de los usuarios de la compañía telefónica TELCEL:
+select sum(saldo) from usuarios where compania = 'TELCEL';
+SELECT SUM(saldo) FROM Usuarios WHERE compania = 'TELCEL';
+
+-- ====================================================
 
 
 -- OTRO EJERCICIO: CREAR UNA BASE DE DATOS CON LA INFORMACIÓ:
